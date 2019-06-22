@@ -1,0 +1,140 @@
+--1)
+SELECT employee_id, last_name, job_id, salary
+FROM employees
+WHERE SALARY >=3000;
+
+--2)
+SELECT employee_id, last_name, job_id, salary, department_id
+FROM employees
+WHERE JOB_ID = 'ST_MAN';
+
+--3)
+SELECT employee_id, last_name, job_id, salary, hire_date, department_id
+FROM employees
+WHERE hire_date > '2006-01-01';
+
+SELECT employee_id, last_name, job_id, salary, hire_date, department_id
+FROM employees
+WHERE hire_date < SYSDATE; -- SYSDATE도 비교할 때 사용 가능 
+
+SELECT employee_id, last_name, job_id, salary, hire_date, department_id
+FROM employees
+WHERE hire_date > TO_DATE('060101', 'YYMMDD');
+
+--4)
+SELECT last_name, job_id, salary, department_id
+FROM employees
+WHERE SALARY BETWEEN 3000 AND 5000;
+
+--5)
+SELECT employee_id, last_name, job_id, salary, hire_date
+FROM employees
+WHERE employee_id = ANY(145,152,203);
+
+--6)
+SELECT employee_id, last_name, job_id, salary, hire_date, department_id
+FROM employees
+WHERE hire_date LIKE '05%';
+
+--7)
+SELECT employee_id, last_name, job_id, salary, hire_date, commission_pct, department_id
+FROM employees
+WHERE commission_pct IS NULL;
+
+--8)
+SELECT employee_id, last_name, job_id, salary, hire_date, department_id
+FROM employees
+WHERE job_id = 'ST_MAN' AND SALARY > 1100;
+
+--9)
+SELECT employee_id, last_name, job_id, salary
+FROM employees
+WHERE job_id LIKE '%MAN' OR SALARY >= 10000;
+
+--10)
+SELECT employee_id, last_name, job_id, salary, department_id
+FROM employees
+WHERE job_id NOT IN('ST_MAN', 'SA_MAN', 'SA_REP');
+
+--11)
+SELECT employee_id, last_name, job_id, salary
+FROM employees
+WHERE (job_id LIKE '%PRES' AND SALARY > 12000) OR job_id = 'SA_MAN' ; 
+
+SELECT employee_id, last_name, job_id, salary
+FROM employees
+WHERE job_id LIKE '%PRES' OR JOB_ID = 'SA_MAN' AND salary>=12000;
+
+
+
+--실습문제
+--6)
+SELECT ename, job, sal
+FROM EMP
+WHERE empno = 7698;
+
+--7)
+SELECT ename, hiredate, sal
+FROM EMP
+WHERE ename = 'SMITH';
+
+--8)
+SELECT ename, job, sal
+FROM emp
+WHERE SAL BETWEEN 2500 AND 3500;
+
+--9)
+SELECT ename,job, sal
+FROM EMP
+WHERE SAL NOT BETWEEN 2000 AND 3000;
+
+--10)
+SELECT ename, job, sal, hiredate
+FROM EMP
+WHERE hiredate BETWEEN '81/05/01' AND '81/12/03';
+
+--11)
+SELECT empno, ename, job, sal
+FROM emp
+WHERE empno NOT IN(7566, 7782, 7934);
+
+--12)
+SELECT ename, sal, deptno, hiredate
+FROM emp
+WHERE deptno = 30 AND SAL <2000 AND hiredate <'81/05/01'; 
+
+--13)
+SELECT ename, sal, deptno
+FROM emp
+WHERE (sal BETWEEN 2000 AND 5000) AND deptno IN(10,30);
+
+--14)
+SELECT empno, ename, job, sal
+FROM emp
+WHERE job IN ('SALESMAN', 'MANAGER') AND sal NOT IN (1600, 2975, 2850);
+
+SELECT empno, ename, job, sal
+FROM emp
+WHERE  (job = 'SALESMAN' OR job = 'MANAGER') AND sal NOT IN (1600, 2975, 2850);
+
+--15)
+SELECT ename, deptno
+FROM emp
+WHERE ename NOT LIKE '%S%' AND deptno = 20;
+
+--16)
+SELECT ename
+FROM emp
+WHERE ename LIKE '%A%' AND ename LIKE '%E%'; 
+
+--17)
+SELECT ename, job
+FROM emp
+WHERE mgr IS NULL;
+
+--18)
+SELECT ename, sal, comm
+FROM emp
+WHERE comm IS NOT NULL
+    AND comm != 0;
+    --AND comm <> 0;

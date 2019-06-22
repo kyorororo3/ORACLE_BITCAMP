@@ -1,0 +1,106 @@
+-- (DML) insert, delete, select(90%), update 
+-- PL : eclipse에서는 안돌아간다 사용은 가능하지만 제작이되지않음 실행이 안돼요 
+
+
+SELECT * FROM EMP; -- SCOTT
+SELECT * FROM EMPLOYEES; -- HUMAN RESOURCE
+
+-- 문제는 SCOTT쪽이 많다 
+
+/*
+SELECT절 선택
+    *  모든 (값, 문자, COLUMN, 함수, SUB QUERY(QUERY문 안의 QUERY)  
+FROM절 테이블명, SUB QUERY 
+*/
+
+SELECT 1 FROM DUAL; -- PRIMARY QUERY 
+
+SELECT * FROM TAB; -- 에디터가 프롬이 밑으로 내려가게 만들어놓았지만 나중가선 이게 더 편함
+-- 현재 계정의 모든 테이블을 표현,출력,소환한 느낌 명세한다!!
+-- TAB은 예약어랑 비슷한 느낌
+
+-- 테이블에서 원하는 COLUMN만을 명세하고 싶을 경우
+SELECT EMPNO, ENAME, SAL
+FROM EMP;
+
+--DUAL :가상테이블
+SELECT SYSDATE FROM DUAL;
+SELECT 4*7 FROM DUAL;
+SELECT 'HELLO'||' ' ||'HELLO' FROM DUAL; --표현할 수 있는 COLUMN이 하나이기 때문에 'HELLO' 'HELLO' 두개를 넣을 경우 오류가 나옴
+SELECT ROUND (10.5) FROM DUAL;
+
+--월급 인상
+SELECT ename, sal, sal + 300
+FROM EMP;
+
+--연봉 계산
+SELECT ENAME, SAL, SAL*12
+FROM EMP;
+
+--ALIAS INT alias[] = array;  alias[0] = 12;
+SELECT sal AS "월급", sal*12 AS 연봉
+FROM EMP;
+-- 큰따옴표존재의 중요성 월 급과 같이 중간에 null값이 들어가야할 경우 "월 급"으로 묶어서 한 단어로 인식하게끔 해야함 alias에 많이 쓰임
+-- 우리의 결과물은 자바에서 산출된다 
+
+-- 연결연산자 || 자바의 경우 : "ABC" + "DEF" ORACLE "ABC" || "DEF"
+SELECT ename || ' has $' ||sal
+FROM EMP;
+
+--중복행 삭제 (DISTINCT) 중복 ROW삭제 -> GROUP BY 절 (더 많이 사용)
+SELECT deptno
+FROM EMP;
+
+--DESC : 테이블 COLUMN의 자료형과 구조를 명시 
+DESC EMP;
+
+
+SELECT * FROM EMP; -- EMPNO ENAME JOB MGR HIREDATE SAL COMM DEPTNO
+
+--1)
+SELECT EMPNO, ENAME, SAL
+FROM EMP;
+
+--2)
+SELECT ENAME AS "이 름", SAL AS "월 급"
+FROM EMP;
+
+--3)
+SELECT EMPNO AS "사원번호", ENAME AS "사원이름", SAL AS "월급", SAL*12 AS "연봉"
+FROM EMP;
+
+--4)
+SELECT DISTINCT JOB
+FROM EMP;
+
+--5)
+SELECT '(' || ENAME || ' , ' || JOB || ')' AS "Employee and Job"
+FROM EMP;
+
+--6)
+SELECT * FROM EMPLOYEES;
+SELECT LAST_NAME AS "이름", SALARY AS " 급여"
+FROM EMPLOYEES;
+
+--7)
+SELECT LAST_NAME AS "NAME", SALARY * 12 "ANNUAL SALARY"
+FROM EMPLOYEES;
+
+--8)
+SELECT FIRST_NAME || ' ' || JOB_ID AS EMPLOYEES
+FROM EMPLOYEES;
+
+--9)
+SELECT LAST_NAME || ' is a ' || JOB_ID AS "Employees Details"
+FROM EMPLOYEES;
+
+--10)
+SELECT LAST_NAME || ' : 1 Year salary  = ' || SALARY*12
+FROM EMPLOYEES;
+
+SELECT JOB_ID 
+FROM EMPLOYEES;
+
+--NVL(컬럼명, 0) 앞의 값이 NULL일 경우 뒤의 값으로 나오게 됨  
+SELECT EMPLOYEE_ID, FIRST_NAME, SALARY, NVL(COMMISSION_PCT, 0), NVL(SALARY + (SALARY * COMMISSION_PCT), 0)
+FROM EMPLOYEES;

@@ -1,0 +1,70 @@
+-- ORDER BY절  : 정렬
+SELECT
+*
+FROM emp
+--ORDER BY sal ASC;  -- 올림차순 정렬
+--ORDER BY sal; -- ACS는 생략가능 이대로 올림차순 정렬이 됨
+--ORDER BY sal DESC; -- 내림차순 정렬
+
+-- ORDER BY sal, ename;
+ORDER BY deptno ASC, sal DESC; -- 정렬은 두가지를 한꺼번에 할 수 있다는 것이 특징 
+
+--alias
+SELECT empno, ename, sal*12 as annual
+FROM emp
+ORDER BY annual;
+
+--nulls first / nulls last 키워드
+SELECT
+    *
+FROM emp
+ORDER BY comm NULLS FIRST;
+
+SELECT
+    *
+FROM emp
+ORDER BY mgr NULLS LAST;
+
+--19)
+SELECT empno, ename, hiredate
+FROM emp
+ORDER BY hiredate ASC;
+
+--20)
+SELECT ename, sal, sal*12
+FROM emp
+ORDER BY sal DESC;
+
+--21)
+SELECT
+    *
+FROM emp
+WHERE deptno IN (10, 20)
+ORDER BY ename ASC;
+
+--22)
+SELECT ename, sal, comm
+FROM emp
+WHERE comm IS NOT NULL AND comm <>0
+ORDER BY comm DESC;
+
+--1)
+SELECT hire_date, employee_id, last_name, job_id, salary, department_id
+FROM employees
+ORDER BY hire_date ASC;
+
+--2)
+SELECT  hire_date, employee_id, last_name, job_id, salary, department_id
+FROM employees
+ORDER BY hire_date DESC;
+
+--3)
+SELECT department_id, salary, employee_id, last_name, job_id
+FROM employees
+ORDER BY department_id ASC, salary DESC;
+
+--4)
+SELECT department_id, job_id, salary, employee_id, last_name, hire_date
+FROM employees
+ORDER BY department_id ASC, job_id ASC, salary DESC;
+
